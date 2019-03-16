@@ -1,0 +1,35 @@
+<?php
+include_once $config['VIEW_PATH'] . 'header.phtml';
+$data = $config['DATA_PATH'] . 'dbh.inc.php';
+include_once $data;
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PURPLE BANANA</title>
+</head>
+<body class="profile">
+    <img src="user.png" alt="userPic" id="userpicture">
+<?php
+$username = $_SESSION['u_uid'];
+$sql = "SELECT* from user_profile where user_uid = '$username';";
+//assoc gets all the associative array
+$result = mysqli_query($conn,$sql);
+$row = mysqli_fetch_assoc($result);
+    //to check the username
+    if (isset($username)){
+        echo "<tr>";
+        echo "<td id='data'>USERNAME:".$row['user_uid']."</td><br>";
+        echo "<td id='data'>FIRST NAME:".$row['user_first']."</td><br>";
+        echo "<td id='data'>LAST NAME:".$row['user_last']."</td><br>";
+        echo "<td id='data'>E-MAIL:".$row['user_email']."</td><br>";
+        echo "</tr>";
+    }
+?>
+</body>
+</html>
+<?php
+//footer
+include_once $config['VIEW_PATH'] . 'footer.phtml';
+?>
